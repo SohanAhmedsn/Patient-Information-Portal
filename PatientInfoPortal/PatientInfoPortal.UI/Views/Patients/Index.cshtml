@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Patient>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="card shadow border-0">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white">Patient List</h1>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="card-body p-1">
+            <div class="row pb-2">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-action="Create" asp-controller="Patients" class="btn btn-outline-primary"><i class="bi bi-plus-square"></i> Create New</a>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead class="table-secondary">
+                    <tr class="fw-bold text-dark text-center">
+                        <th>Patient Name</th>
+                        <th>Disease</th>
+                        <th>Epilepsy</th>
+                        <th>Allergies</th>
+                        <th>NCDs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        <tr class="fw-normal text-dark text-center">
+                            <td>@p.PatientName</td>
+                            <td>@p.DiseaseInformation.DiseaseName</td>
+                            <td>@p.Epilepsy</td>
+                            <td>@(string.Join(", ", p.Allergy_Details.Select(x => x.Allergy.AllergyName).ToList()))</td>
+                            <td>@(string.Join(", ", p.NCD_Details.Select(x => x.NCD.NCDName).ToList()))</td>
+                        </tr>
+                    }
+                </tbody>
+ </table>
+
+</div>
+
+    </div>
+
+
+@* /*
+
+    Features
+    Add, Update, Delete, and View Patients
+    Uses Repository Pattern
+    Includes Unit Tests
+
+    Technologies
+
+    ASP.NET Core MVC
+    Entity Framework Core
+    MS SQL Server
+
+
+*/ *@
